@@ -37,12 +37,13 @@ public class CommentController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-		List<Comment> comments = commentService.getAllCommentsForToday();
-		Map<CommentType, List<Comment>> groupedComments = comments.stream().collect(Collectors.groupingBy(Comment::getType));
-		model.addAttribute("starComments", groupedComments.get(CommentType.STAR));
-		model.addAttribute("deltaComments", groupedComments.get(CommentType.DELTA));
-		model.addAttribute("plusComments", groupedComments.get(CommentType.PLUS));
-		return "comment"; 
+        List<Comment> allComments = commentService.getAllCommentsForToday();
+        Map<CommentType, List<Comment>> groupedComments = allComments.stream().collect(Collectors.groupingBy(Comment::getType));
+        model.addAttribute("starComments", groupedComments.get(CommentType.STAR));
+        model.addAttribute("deltaComments", groupedComments.get(CommentType.DELTA));
+        model.addAttribute("plusComments", groupedComments.get(CommentType.PLUS));
+
+        return "comment";
 	}
 	
 	@PostMapping("/comment")
