@@ -35,7 +35,7 @@ public class CommentServiceTest {
 	
 	@Test
 	public void getAllCommentsForToday_HappyPath_ShouldReturn1Comment() {
-		 // Given first
+		 // Given first test
         Comment comment = new Comment();
         comment.setComment("Test");
         comment.setType(CommentType.PLUS);
